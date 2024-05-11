@@ -9,6 +9,20 @@ export default function Home() {
         .then(result => setTodos(result.data))
         .catch(err => console.log(err))
     }, [])
+    const handleDone = (id) => {
+        axios.put('http://localhost:4000/updateTask/' + id)
+        .then(result => {
+            window.location.reload()
+        })
+        .catch(err => console.log(err))
+    }
+    const handleDelete = (id) => {
+        axios.delete('http://localhost:4000/deleteTask/' + id)
+        .then(result => {
+            window.location.reload()
+        })
+        .catch(err => console.log(err))
+    }
     return(
         <div>
             <h1>Todo List</h1>
@@ -20,9 +34,19 @@ export default function Home() {
                 </div>:
                 todos.map(todo =>(
                     <div>
-                        <h1>done?</h1>
+                        <button onClick={() => handleDone(todo._id)}>
+                            {
+                                todo.done ? 
+                                <h1>
+                                    Done
+                                </h1>: 
+                                <h1>
+                                    NotDone
+                                </h1>
+                            }
+                        </button>
                         <h1>{todo.task}</h1>
-                        <h1>del</h1>
+                        <button onClick={() => handleDelete(todo._id)}>del</button>
                     </div>
                 ))
             }

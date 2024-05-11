@@ -6,8 +6,7 @@ export default function Create() {
     const handleAdd = () => {
         axios.post('http://localhost:4000/addTask', {frontTask: frontTask})
         .then(result => {
-            console.log(result)
-            setFrontTask("")
+            window.location.reload()
         })
         .catch(err => console.log(err))
     }
