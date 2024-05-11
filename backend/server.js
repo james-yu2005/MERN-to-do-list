@@ -21,8 +21,10 @@ app.get('/getTask', (req, res) => {
 
 app.post('/addTask', (req, res) => {
     const backTask = req.body.frontTask
+    const People = req.body.person
     TodoModel.create({
-        task: backTask
+        task: backTask,
+        person: People
     }).then(result => res.json(result))
     .catch(err => res.json(err))
 })

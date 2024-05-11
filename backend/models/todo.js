@@ -5,6 +5,9 @@ const TodoSchema = new mongoose.Schema({
     done: {
         type: Boolean,
         default: false
+    },
+    person: {
+        type: String,
     }
 }, { timestamps: true })
 
