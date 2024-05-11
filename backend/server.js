@@ -2,16 +2,24 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const TodoModel = require('./models/todo')
+require('dotenv').config()
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
-//mongoose.connect(HELLOEOEOEOEO)
-app.post('/api/addTask', (req, res) => {
-    const task = req.body.task
+mongoose.connect(process.env.MONGO_URI)
+
+app.get('/getTask', (req, res) => {
+    TodoModel.find()
+    .then(result => res.json(result))
+    .catch(err => res.json(err))
+})
+
+app.post('/addTask', (req, res) => {
+    const backTask = req.body.frontTask
     TodoModel.create({
-        task: task
+        task: backTask
     }).then(result => res.json(result))
     .catch(result => res.json(err))
 })
