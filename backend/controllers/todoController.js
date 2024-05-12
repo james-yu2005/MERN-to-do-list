@@ -30,9 +30,18 @@ function deleteTask(req, res) {
     .catch(err => res.json(err))
 }
 
+function editTask(req, res) {
+    const { id } = req.params
+    const { frontTask: backTask, timeNeeded } = req.body
+    TodoModel.findByIdAndUpdate({_id: id}, {task: backTask}, {timeNeeded})
+    .then(result => res.json(result))
+    .catch(err => res.json(err))
+}
+
 module.exports = {
     getTasks,
     addTask,
     updateTask,
-    deleteTask
+    deleteTask,
+    editTask
 }

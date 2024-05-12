@@ -6,7 +6,8 @@ const {
     getTasks,
     addTask,
     updateTask,
-    deleteTask
+    deleteTask,
+    editTask
 } = require('./controllers/todoController')
 
 require('dotenv').config()
@@ -24,7 +25,9 @@ app.get('/getTask', getTasks)
 
 app.post('/addTask', addTask)
 
-app.put('/updateTask/:id', updateTask) 
+app.put('/doneTask/:id', updateTask)
+
+app.patch('/editTask/:id', editTask) 
 
 app.delete('/deleteTask/:id', deleteTask)
 
