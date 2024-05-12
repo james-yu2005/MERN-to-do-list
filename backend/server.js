@@ -2,6 +2,13 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const TodoModel = require('./models/todo')
+const {
+    getTasks,
+    addTask,
+    updateTask,
+    deleteTask
+} = require('./controllers/todoController')
+
 require('dotenv').config()
 
 const app = express()
@@ -13,33 +20,11 @@ app.listen(4000, () => {
     console.log('Server is running on port 4000')
 })
 
-app.get('/getTask', (req, res) => {
-    TodoModel.find()
-    .then(result => res.json(result))
-    .catch(err => res.json(err))
-})
+app.get('/getTask', getTasks)
 
-app.post('/addTask', (req, res) => {
-    const backTask = req.body.frontTask
-    const People = req.body.person
-    TodoModel.create({
-        task: backTask,
-        person: People
-    }).then(result => res.json(result))
-    .catch(err => res.json(err))
-})
+app.post('/addTask', addTask)
 
-app.put('/updateTask/:id', (req, res) => {
-    const { id } = req.params
-    TodoModel.findByIdAndUpdate({_id: id}, {done: true})
-    .then(result => res.json(result))
-    .catch(err => res.json(err))
-})
+app.put('/updateTask/:id', updateTask) 
 
-app.delete('/deleteTask/:id', (req, res) => {
-    const { id } = req.params
-    TodoModel.findByIdAndDelete({_id: id})
-    .then(result => res.json(result))
-    .catch(err => res.json(err))
-})
+app.delete('/deleteTask/:id', deleteTask)
 

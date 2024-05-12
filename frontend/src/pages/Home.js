@@ -46,10 +46,12 @@ export default function Home() {
                             }
                         </button>
                         <h1>{todo.task}</h1>
+                        <h1>{todo.time}</h1>
                         <button onClick={() => handleDelete(todo._id)}>del</button>
                     </div>
                 ))
             }
+            
         </div>
     )
 }

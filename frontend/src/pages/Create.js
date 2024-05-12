@@ -3,8 +3,13 @@ import axios from 'axios'
 
 export default function Create() {
     const [frontTask, setFrontTask] = useState()
-    const handleAdd = () => {
-        axios.post('http://localhost:4000/addTask', {frontTask: frontTask})
+    const [timeNeeded, setTimeNeeded] = useState()
+
+    const handleSubmit = () => {
+        axios.post('http://localhost:4000/addTask', {
+            frontTask: frontTask,
+            timeNeeded: timeNeeded,
+        })
         .then(result => {
             window.location.reload()
         })
@@ -12,8 +17,11 @@ export default function Create() {
     }
     return(
         <div>
-            <input name="" id="" placeholder="Enter task" onChange={(e) => setFrontTask(e.target.value)}/>
-            <button type="button" onClick={handleAdd}>Add</button>
+            <form onSubmit={handleSubmit}>
+                <input name="" id="" placeholder="Enter task" onChange={(e) => setFrontTask(e.target.value)}/>
+                <input name="" placeholder="Time needed?" onChange={(e) => setTimeNeeded(e.target.value)}/>
+                <button type="submit">Add</button>
+            </form>
         </div>
     )
 }
